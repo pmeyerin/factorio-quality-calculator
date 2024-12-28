@@ -1,0 +1,25 @@
+<div style="display: flex; flex-direction: column;">
+  <div class="in-line-components">
+    <app-factory-designer style="width: 45%"></app-factory-designer>
+    <app-recycler-designer style="width: 45%"></app-recycler-designer>
+  </div>
+  <div class="quality-segment">
+    Given:<br/>
+    Q = quality expressed on a scale of 0 to 1 (e.g. 10% quality on your factory is 0.1)<br/>
+    P = productivity expressed on a scale of 0 to 1 added to one (e.g. 10% productivity on your factory is 1.1)<br/>
+    F = the likelihood of failure. A failure is when your item is eaten by the recycler. This is always .75 in practice, as a recycler eats 75% of its input.<br/>
+    L_c = The likelihood of a given common item going on to become a legendary item. This is the value we seek to compute. Other rarities are L_u, L_r, and L_e <br/>
+    k = the number of iterations through the recyclers. Assessing the limit as this approaches infinity is how we know the actual likelihood<br/>
+    f(Q, k) = sum_(n=0)^k (1 - Q)^n (1 - F)^(n + 1) = -((F - 1) ((1 - F)^k (1 - Q)^k - F (1 - F)^k (1 - Q)^(k + 1) - Q (1 - F)^k (1 - Q)^k - 1))/(F (Q - 1) - Q)
+    lim(k->infinity) f(Q, k) = (1 - F)/(F + Q - F Q)
+    <br/>
+    L_e = Q*f(Q, k)
+    L_r = Q*(.1*f(Q, k) + .9*f(Q, k)*L_e)
+    L_u = Q*(.01*f(Q, k) + .09*f(Q, k)*L_e + .9*f(Q, k)*L_r)
+    L_c = Q*(.001*f(Q, k) + .009*f(Q, k)*L_e + .09*f(Q, k)*L_r + .9*f(Q, k)*L_u)
+  </div>
+  <div class="result-segment">
+    <mat-label style="color: orange">Legendary</mat-label><mat-label> rate where 0 means none and 1 means 100%: </mat-label>
+    <mat-label style="color: orange; font-weight: bold">{{qualityCalculatorService.calculatedSuccessOdds | number: '1.0-10'}}</mat-label>
+  </div>
+</div>

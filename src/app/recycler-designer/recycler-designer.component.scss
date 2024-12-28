@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use '../../cit-abby-theme.scss' as theme;
+
+.designer-div {
+  border-style: solid;
+  border-color: theme.$dark-accent;
+  border-width: 2px;
+  background: theme.$dark-background;
+  color: theme.$light-accent-text;
+  padding: 4px;
+}
+
+.module-selector {
+  width: 300px;
+}
+
+.factory-summary {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5px
+}

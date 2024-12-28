@@ -1,0 +1,35 @@
+<div class="designer-div">
+  <h3>Factory</h3>
+
+  <mat-form-field class="module-selector">
+    <mat-label>Add module</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let module of factoryService.displayFactoryModules"
+                  style="color: {{module.getQualityDisplayColor()}}"
+                  (click)="factoryService.selectFactoryModule(module); qualityCalculatorService.doRecyclerCalculation()">
+        {{module.getDisplayName()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="factory-summary">
+    <span style="padding-right: 20px;">
+      <mat-label>Quality: </mat-label>
+      <mat-label>{{(qualityCalculatorService.calculateFactoryQuality() * 100) | number: '1.0-2'}}%</mat-label>
+    </span>
+    <span style="padding-left: 20px">
+      <mat-label>Productivity: </mat-label>
+      <mat-label>{{ qualityCalculatorService.calculateFactoryProductivity() * 100}}%</mat-label>
+    </span>
+  </div>
+  <div style="width: 40%; border: 1px solid black; flex-grow: 1">
+    <mat-list style="overflow: scroll; max-height: 400px; height: 400px; flex-grow: 1" appScrollable>
+      <mat-list-item *ngFor="let module of factoryService.selectedFactoryModules">
+        <p style="color: {{module.getQualityDisplayColor()}}">{{module.getDisplayName()}}</p>
+        <button mat-icon-button matListItemMeta
+                (click)="factoryService.deleteFactoryModule(module); qualityCalculatorService.doRecyclerCalculation()">
+          <mat-icon >delete</mat-icon>
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

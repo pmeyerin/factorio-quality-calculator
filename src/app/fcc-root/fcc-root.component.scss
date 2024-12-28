@@ -1,0 +1,61 @@
+@use '@angular/material' as mat;
+@use '../../cit-abby-theme.scss' as theme;
+
+.in-line-components {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-top: 10px;
+  flex-grow: initial;
+}
+.whole-page {
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+@media screen and (max-width: 950px) {
+  .whole-page {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+}
+
+.katex-html {
+  display: block;
+  position: relative;
+}
+
+.katex-mathml {
+  position: absolute;
+  clip: rect(1px,1px,1px,1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.katex {
+  display: block;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.quality-segment {
+  border-style: solid;
+  border-color: theme.$dark-accent;
+  border-width: 2px;
+  background: theme.$dark-background;
+  color: theme.$light-accent-text;
+  padding: 4px;
+  width: 50%;
+  margin-top: 10px;
+  align-self: center;
+}
+
+.result-segment {
+  margin-top: 10px;
+  align-self: center;
+}
